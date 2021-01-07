@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { FormControl, Validators, FormGroup } from "@angular/forms";
-import { ZipeCodeService } from "app/services/zip-code.service";
+import { ZipCodeService } from "app/services/zip-code.service";
 
 @Component({
   selector: "zip-code-form",
@@ -12,10 +12,11 @@ export class ZipCodeFormComponent {
     zipCodeInput: new FormControl("", [Validators.pattern(/^\d{5}(?:\d{2})?$/)])
   });
 
-  public constructor(private zipCodeService: ZipeCodeService) {}
+  public constructor(private zipCodeService: ZipCodeService) {}
 
   public addLocation(): void {
-    this.zipCodeService.addZipCode(+this.zipCodeInput.value);
+    this.zipCodeService.addZipCode(this.zipCodeInput.value);
+    this.zipCodeInput.setValue("");
   }
 
   get zipCodeInput() { return this.zipCodeFormGroup.get('zipCodeInput'); }

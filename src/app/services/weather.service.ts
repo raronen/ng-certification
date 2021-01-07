@@ -11,13 +11,16 @@ export class WeatherService {
     
     constructor(private http: HttpClient,  @Inject(WEATHER_APP_ID) private weatherAppId: string) { }
 
-    public getZipCodeCurrentWeather(zipcode: number): Observable<ZipCodeInfo> {
-        const params: HttpParams = {
-            zip: zipcode,
-        }
+    public getZipCodeCurrentWeather(zipcode: string): Observable<ZipCodeInfo> {
+        const params: HttpParams = new HttpParams({
+            fromObject: {
+                zip: zipcode.toString(),
+                appid: this.weatherAppId
+            }
+        })
 
-        return this.http.get<ZipCodeInfo>('http://api.openweathermap.org/data/2.5/weather', {
-            params: 
+        return this.http.get<ZipCodeInfo>('http://api.openweathermap.org/data/2.5/weather', { 
+            params
         })
     }
 }

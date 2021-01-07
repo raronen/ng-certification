@@ -1,26 +1,57 @@
+import * as _ from "lodash";
 import { Injectable } from "@angular/core";
+import { ZipCode } from "app/models/ZipCode";
 import { ZipCodeInfo } from "app/models/ZipCodeInfo";
+import { from, Observable } from "rxjs";
+import { map, mergeMap } from "rxjs/operators";
+import { WeatherService } from "./weather.service";
 
 @Injectable({
     providedIn: 'root'
 })
-export class ZipeCodeService {
+export class ZipCodeService {
     private static readonly ZIP_CODE_ARRAY_KEY: string = "ZIP_CODE_ARRAY"; 
-    private zipCodesInfo: ZipCodeInfo[];
+    private zipCodes: ZipCode[] = [];
 
-    constructor() {
-        const zipCodeLocalStorage: string = window.localStorage.getItem(ZipeCodeService.ZIP_CODE_ARRAY_KEY);
+    constructor(private weatherService: WeatherService) {
+        const zipCodeLocalStorage: string = window.localStorage.getItem(ZipCodeService.ZIP_CODE_ARRAY_KEY);
 
-        const zipCodes: number[] = zipCodeLocalStorage ? JSON.parse(zipCodeLocalStorage) : [];
+        const zipCodes: string[] = zipCodeLocalStorage ? JSON.parse(zipCodeLocalStorage) : [];
+
+        this.getZipCodeInfo(zipCodes).subscribe((zipCode: ZipCode) => this.zipCodes.push(zipCode));
         
     }
 
-    public addZipCode(zipCode: number): void {
-        if (this.zipCodes.indexOf(zipCode) !== -1) {
+    public addZipCode(zipCodeNumber: string): void {
+        // If already exists
+        if (this.zipCodes.filter(z => z.zipCodeNumber == zipCodeNumber).length > 0) {
             return;
         }
 
-        this.zipCodes.push(zipCode);
-        localStorage.setItem(ZipeCodeService.ZIP_CODE_ARRAY_KEY, JSON.stringify(this.zipCodes));
+        this.getZipCodeInfo([zipCodeNumber]).subscribe((zipCode: ZipCode) => {
+            this.zipCodes.push(zipCode);
+            this.setLocalStorage();
+        },
+        () => alert('ZipCode wan\'t found')
+        );
+    }
+
+    public removeZipCode(zipCodeNumber: string): void {
+        _.remove(this.zipCodes, ((z: ZipCode) => z.zipCodeNumber == zipCodeNumber));
+        this.setLocalStorage();
+    }
+
+    private getZipCodeInfo(zipCodes: string[]): Observable<ZipCode> {
+        return from(zipCodes).pipe(
+            mergeMap<string, Observable<ZipCode>>((zipCodeNumber: string) => {
+                return this.weatherService.getZipCodeCurrentWeather(zipCodeNumber).pipe(
+                    map((zipCodeInfo: ZipCodeInfo) => ({ zipCodeNumber, zipCodeInfo}))
+                );
+            })
+        );
+    }
+
+    private setLocalStorage(): void {
+        localStorage.setItem(ZipCodeService.ZIP_CODE_ARRAY_KEY, JSON.stringify(this.zipCodes.map(z => z.zipCodeNumber)));
     }
 }

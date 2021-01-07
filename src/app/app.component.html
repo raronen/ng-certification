@@ -1,2 +1,2 @@
 <zip-code-form></zip-code-form>
-<zip-code-cards-list></zip-code-cards-list>
+<zip-code-card *ngFor="let card of zipCodeService.zipCodes" [card]="card"></zip-code-card>

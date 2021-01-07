@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { ZipCodeService } from "./services/zip-code.service";
 
 @Component({
   selector: "my-app",
@@ -6,4 +7,5 @@ import { Component } from "@angular/core";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
+  public constructor(public zipCodeService: ZipCodeService) {}
 }

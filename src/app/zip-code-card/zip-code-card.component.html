@@ -1,3 +1,19 @@
-<div class="well">
-    Weather Card
-</div>
+<div class="well flex">
+    <div>
+      <h3>{{card.zipCodeInfo.name}} ({{card.zipCodeNumber}})</h3>
+      <h4>Current conditions: {{card.zipCodeInfo.weather[0].main}}</h4>
+      <h4>Temperatures today:</h4>
+      <p>
+        Current {{card.zipCodeInfo.main.temp}}
+        - Max {{card.zipCodeInfo.main.temp_max}}
+        - Min {{card.zipCodeInfo.main.temp_min}}
+      </p>
+      <p>
+        <a href="{{'/forecast/' + card.zipCodeNumber}}">Show 5-day forecast for {{card.zipCodeInfo.name}}</a>
+      </p>
+    </div>
+    <div>
+      <span class="close" (click)="remove()">×</span>
+      <img src="{{card.zipCodeInfo.weather[0].main | image}}">
+    </div>
+ </div>

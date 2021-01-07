@@ -1,4 +1,6 @@
-export interface ZipCodeInfo {
-    zipcode: number;
-    info: ZipCodeInfo;
+import { ZipCodeInfo } from "app/models/ZipCodeInfo";
+
+export interface ZipCode {
+    zipCodeNumber: string;
+    zipCodeInfo: ZipCodeInfo;
 }
