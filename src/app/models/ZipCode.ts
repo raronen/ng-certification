@@ -1,4 +1,4 @@
-import { ZipCodeInfo } from "app/models/ZipCodeInfo";
+import { ZipCodeInfo } from "./ZipCodeInfo";
 
 export interface ZipCode {
     zipCodeNumber: string;

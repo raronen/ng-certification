@@ -1,7 +1,7 @@
 import * as _ from "lodash";
 import { Injectable } from "@angular/core";
-import { ZipCode } from "app/models/ZipCode";
-import { ZipCodeInfo } from "app/models/ZipCodeInfo";
+import { ZipCode } from "../models/ZipCode";
+import { ZipCodeInfo } from "../models/ZipCodeInfo";
 import { from, Observable } from "rxjs";
 import { map, mergeMap } from "rxjs/operators";
 import { WeatherService } from "./weather.service";

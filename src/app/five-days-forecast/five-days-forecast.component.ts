@@ -1,8 +1,8 @@
 import { Component, OnDestroy } from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
-import { FiveDaysForecast } from "app/models/FiveDaysForecast";
-import { WeatherService } from "app/services/weather.service";
-import { Observable, Subscription } from "rxjs";
+import { FiveDaysForecast } from "../models/FiveDaysForecast";
+import { WeatherService } from "../services/weather.service";
+import { Subscription } from "rxjs";
 import { map, switchMap } from "rxjs/operators";
 
 @Component({

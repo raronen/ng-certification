@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { ZipCodeService } from "app/services/zip-code.service";
+import { ZipCodeService } from "../services/zip-code.service";
 
 @Component({
   selector: "main-view",

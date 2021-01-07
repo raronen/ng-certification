@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core";
-import { ZipCode } from "app/models/ZipCode";
-import { ZipCodeService } from "app/services/zip-code.service";
+import { ZipCode } from "../models/ZipCode";
+import { ZipCodeService } from "../services/zip-code.service";
 
 @Component({
     selector: "zip-code-card",

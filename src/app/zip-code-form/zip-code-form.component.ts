@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { FormControl, Validators, FormGroup } from "@angular/forms";
-import { ZipCodeService } from "app/services/zip-code.service";
+import { ZipCodeService } from "../services/zip-code.service";
 
 @Component({
   selector: "zip-code-form",
