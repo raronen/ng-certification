@@ -1,0 +1,17 @@
+<div class="well" [formGroup]="zipCodeFormGroup" (ngSubmit)="addLocation()">
+  <h2>Enter a zipcode:</h2>
+  <input class="form-control" placeholder="Zipcode" type="text" formControlName="zipCodeInput" required>
+  <div *ngIf="zipCodeInput.invalid && (zipCodeInput.dirty || zipCodeInput.touched)"
+      class="alert alert-danger">
+
+    <div *ngIf="zipCodeInput.errors">
+      Please insert valid zip code.
+    </div>
+  </div>
+
+  <br>
+
+  <button class="btn btn-primary" type="submit" (click)="addLocation()">
+    Add location
+  </button>
+</div>

@@ -1,0 +1,22 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+      "baseUrl": "./",
+      "target": "es5",
+      "noImplicitAny": false,
+      "module": "esnext",
+      "removeComments": false,
+      "declaration": false,
+      "noEmitOnError": true,
+      "sourceMap": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "skipLibCheck": true,
+      "rootDir": ".",
+      "moduleResolution": "node",
+      "importHelpers": true,
+      "preserveSymlinks": true,
+      "lib": [ "es2018", "dom" ],
+      "resolveJsonModule": true
+    }
+  }
