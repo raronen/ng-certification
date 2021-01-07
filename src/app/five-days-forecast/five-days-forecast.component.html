@@ -1,0 +1,21 @@
+<div class="container-fluid">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">5-day forecast for {{forecast?.city.name}}</h3>
+  
+      </div>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let day of forecast?.list | slice:0:5; let i=index">
+          {{today + 60 * 60 * 24 * 1000 * i | date: 'EEEE, MMMM d'}}
+          {{day.weather.main}}
+          - Min: {{day.temp.min}}
+          - Max: {{day.temp.max}}
+  
+          <img class="icon" src="{{day.weather[0].main | image}}">
+        </li>
+      </ul>
+    </div>
+    <a [routerLink]="['/']">
+        <button class="btn btn-success" tabindex="0" id="mainPageBtn">&lt; Back to main page</button>
+    </a>
+  </div>
