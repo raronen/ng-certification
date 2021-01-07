@@ -1,24 +1,23 @@
-import { Injectable } from "@angular/core";
+import { Inject, Injectable } from "@angular/core";
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { ZipCodeInfo } from "app/models/ZipCodeInfo";
+import { Observable } from "rxjs";
+import { WEATHER_APP_ID } from "app/common/InjectionTokens";
 
 @Injectable({
     providedIn: 'root'
 })
 export class WeatherService {
-    private static readonly ZIP_CODE_ARRAY_KEY: string = "ZIP_CODE_ARRAY"; 
-    private zipCodes: number[];
+    
+    constructor(private http: HttpClient,  @Inject(WEATHER_APP_ID) private weatherAppId: string) { }
 
-    constructor() {
-        const zipCodeLocalStorage: string = window.localStorage.getItem(WeatherService.ZIP_CODE_ARRAY_KEY);
-
-        this.zipCodes = zipCodeLocalStorage ? JSON.parse(zipCodeLocalStorage) : [];
-    }
-
-    public addZipCode(zipCode: number): void {
-        if (this.zipCodes.indexOf(zipCode) !== -1) {
-            return;
+    public getZipCodeCurrentWeather(zipcode: number): Observable<ZipCodeInfo> {
+        const params: HttpParams = {
+            zip: zipcode,
         }
 
-        this.zipCodes.push(zipCode);
-        localStorage.setItem(WeatherService.ZIP_CODE_ARRAY_KEY, JSON.stringify(this.zipCodes));
+        return this.http.get<ZipCodeInfo>('http://api.openweathermap.org/data/2.5/weather', {
+            params: 
+        })
     }
 }

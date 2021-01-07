@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { FormControl, Validators, FormGroup } from "@angular/forms";
-import { WeatherService } from "app/services/weather.service";
+import { ZipeCodeService } from "app/services/zip-code.service";
 
 @Component({
   selector: "zip-code-form",
@@ -12,10 +12,10 @@ export class ZipCodeFormComponent {
     zipCodeInput: new FormControl("", [Validators.pattern(/^\d{5}(?:\d{2})?$/)])
   });
 
-  public constructor(private weatherService: WeatherService) {}
+  public constructor(private zipCodeService: ZipeCodeService) {}
 
   public addLocation(): void {
-    this.weatherService.addZipCode(+this.zipCodeInput.value);
+    this.zipCodeService.addZipCode(+this.zipCodeInput.value);
   }
 
   get zipCodeInput() { return this.zipCodeFormGroup.get('zipCodeInput'); }
