@@ -1,7 +1,7 @@
 {
     "compileOnSave": true,
     "compilerOptions": {
-      "baseUrl": "./",
+      "baseUrl": "./src",
       "target": "es5",
       "noImplicitAny": false,
       "module": "esnext",
@@ -17,6 +17,9 @@
       "importHelpers": true,
       "preserveSymlinks": true,
       "lib": [ "es2018", "dom" ],
-      "resolveJsonModule": true
+      "resolveJsonModule": true,
+      "paths": {
+        "@app/*": ["app/*"]
+      }
     }
   }
